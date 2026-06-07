@@ -1,0 +1,10 @@
+<form action="{% url 'steps:createStep' %}" method="post">
+{% csrf_token %}
+<fieldset>
+    <input type="date" name="day" id="day">
+    <input type="number" name="steps" id="steps">
+    <input type="number" name="goal" id="goal">
+
+    <input type="submit" value="Submit">
+</fieldset>
+</form>
