@@ -31,12 +31,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'authentication:home'
+LOGIN_URL = 'authentication:login'
 
 # Application definition
 
 INSTALLED_APPS = [
     'steps.apps.StepsConfig',
+    'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
