@@ -31,10 +31,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'login'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'steps.apps.StepsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
