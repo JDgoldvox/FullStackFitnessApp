@@ -3,8 +3,10 @@
 export default function SmallStatisticNode({statistic}) {
     return (
         <>
-            <div className="statistic-node-small">
-                <p>{statistic}</p>
+            <div className="small-node">
+                
+                
+                <p className="node-value">{statistic}</p>
             </div>
         </>
     )

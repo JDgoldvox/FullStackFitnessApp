@@ -1,0 +1,6 @@
+
+.background-color{
+    background-color: var(--primary-cream);
+    min-height: 100vh;  
+    min-width: 100vw;
+}
