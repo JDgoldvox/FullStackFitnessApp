@@ -24,4 +24,5 @@ urlpatterns = [
     path('steps/', include("steps.urls")),
     path('auth/', include("authentication.urls")),
     path('admin/', admin.site.urls),
+    path('api/', include("restapi.urls"), name="rest_framework"),
 ]
