@@ -1,37 +1,39 @@
 ﻿
-.nav-bar
+.navbar-container
 {
     display: flex;
     justify-content: start;
-    gap: 5rem;
-    list-style-type: none;
-    background-color: var(--accent-green);
     align-items: center;
+    background-color: var(--accent-green);
 }
 
-.nav-bar-item
+.navbar-links
+{
+    display: flex;
+    justify-content: start;
+    gap: 2rem;
+    list-style-type: none;
+}
+
+.navbar-item
 {
     padding: 1rem;
     font-size: 24px;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.nav-bar-item a {
+.navbar-item a {
     text-decoration: none;
     color: var(--primary-cream);
 }
 
-.nav-bar-item a:hover
+.navbar-item a:hover
 {
     color: var(--primary-font-color);
 }
 
-.nav-bar-item li.active
-{
-    background-color: var(--primary-cream);
-}
 
 .navbar-logo
 {
-    display: flex;
+    margin-left: 2rem;
 }
