@@ -1,12 +1,12 @@
 ﻿import '@/components/nodes/StatisticNode.css'
 import NodeTitle from "@/components/nodes/NodeTitle.jsx"
 
-export default function SmallStatisticNode({title, statistic, unit, goal, fact}) {
+export default function StatisticNode({title, Icon, statistic, unit, goal, fact}) {
     return (
         <>
             <div className="small-node">
-                    <NodeTitle title={title}/>  
-                
+                    <NodeTitle title={title} Icon={Icon}/>  
+                    
                     <p className="node-statistic">
                         {statistic} 
                         <span style={{ fontWeight: "normal"}}>  {unit}</span>
@@ -20,9 +20,4 @@ export default function SmallStatisticNode({title, statistic, unit, goal, fact})
             </div>
         </>
     )
-}
-
-export function LargeStatisticNode()
-{
-    
 }

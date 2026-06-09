@@ -1,12 +1,13 @@
 ﻿import '@/components/nodes/NodeTitle.css'
-import { Smile } from "lucide-react";
 
-export default function NodeTitle({title}) {
+export default function NodeTitle({title, Icon}) {
     return (
         <div className="shape">
             <p className="title-text">
-                {title}
-                <Smile style={{ marginLeft: '12px' }} /> 
+                {title} 
+                <Icon className="icon-style" 
+                    size={32}
+                /> 
             </p> 
         </div>
     )

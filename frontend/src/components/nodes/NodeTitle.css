@@ -17,6 +17,16 @@
 
 .title-text
 {
+    display: flex;
     font-size: 30px;
     font-weight: bold;
+    align-items: center;
+}
+
+.icon-style
+{
+    Display: inline-flex;
+    margin-left: 15px;
+    justify-content: center;
+    align-content: center;
 }

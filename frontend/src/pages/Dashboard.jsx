@@ -1,5 +1,10 @@
 ﻿import SmallStatisticNode from "@/components/nodes/StatisticNode.jsx";
 import '@/pages/Dashboard.css';
+import {Dumbbell} from "lucide-react";
+import {Droplets} from "lucide-react";
+import {Leaf} from "lucide-react";
+import {Footprints} from "lucide-react";
+import {HeartPulse} from "lucide-react";
 
 export default function Dashboard() {
     return (
@@ -12,7 +17,6 @@ export default function Dashboard() {
                 </p>
             </div>
             
-            
             <div className="grid-container">
                 {/* 1. Water */}
                 <SmallStatisticNode
@@ -21,6 +25,7 @@ export default function Dashboard() {
                     unit="ml"
                     goal="5000"
                     fact="15 glasses drank"
+                    Icon={Droplets}
                 />
 
                 {/* 2. Calories */}
@@ -30,8 +35,9 @@ export default function Dashboard() {
                     unit="kcal"
                     goal="2200"
                     fact="Remaining: 350 kcal"
+                    Icon={Leaf}
                 />
-
+                
                 {/* 3. Steps */}
                 <SmallStatisticNode
                     title="steps"
@@ -39,8 +45,9 @@ export default function Dashboard() {
                     unit="steps"
                     goal="10,000"
                     fact="Distance: 5.8"
+                    Icon={Footprints}
                 />
-
+                
                 {/* 4. Exercises Completed */}
                 <SmallStatisticNode
                     title="exercises"
@@ -48,8 +55,9 @@ export default function Dashboard() {
                     unit="exercises"
                     goal="5 weekly"
                     fact="Total Time: 1h 15m"
+                    Icon={Dumbbell}
                 />
-
+                
                 {/* 5. Heartrate */}
                 <SmallStatisticNode
                     title="heartrate"
@@ -57,6 +65,7 @@ export default function Dashboard() {
                     unit="bpm"
                     goal="Resting Avg: 64"
                     fact="Status: Normal"
+                    Icon={HeartPulse}
                 />
             </div>
         </>
