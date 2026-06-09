@@ -8,3 +8,10 @@
     gap: 20px;    
     flex-wrap: wrap;
 }
+
+.title{
+    font-size: 36px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    padding: 0;
+    text-align: center;
+}

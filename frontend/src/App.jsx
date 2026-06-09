@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import './App.css'
-import Dashboard from '@/pages/Dashboard.jsx'
+import Navbar from '@/components/navbar/Navbar.jsx'
+import {Outlet} from "react-router";
 
 function App() {
 
   return (
     <>
         <div className="background-color">
-          <Dashboard />
+            <Navbar />
+            <Outlet />
         </div>
     </>
   )

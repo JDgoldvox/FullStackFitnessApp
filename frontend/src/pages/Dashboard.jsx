@@ -1,12 +1,17 @@
 ﻿import SmallStatisticNode from "@/components/nodes/StatisticNode.jsx";
 import '@/pages/Dashboard.css';
 
-import { Smile } from "lucide-react";
-
 export default function Dashboard() {
     return (
         <>
-            <p> hello world, this is dashboard </p>
+            <div className="title">
+                <p> 
+                    Hello { }
+                    <b>Liam</b>
+                    , Welcome back to the dashboard.
+                </p>
+            </div>
+            
             
             <div className="grid-container">
                 {/* 1. Water */}
