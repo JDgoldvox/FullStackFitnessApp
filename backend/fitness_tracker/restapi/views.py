@@ -1,55 +1,25 @@
 from django.contrib.auth.models import Group, User
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsSelf
 
 from rest_framework import permissions, viewsets
-from rest_framework.decorators import api_view
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
 
-from .serializers import GroupSerializer, UserSerializer, StepCountSerializer
-from steps.views import StepCount
+from .serializers import GroupSerializer, UserSerializer, WorkoutSerializer
 
 from rest_framework import generics
 from .models import Workout
-from .serializers import WorkoutSerializer
-
-# @api_view(["GET"])
-# def api_root(request, format=None):
-#     return Response({
-#         "users": reverse("user-list", request=request, format=format),
-#         "snippets": reverse("workout-list", request=request, format=format)
-#     })
 
 class WorkoutViewSet(viewsets.ModelViewSet):
-    queryset = Workout.objects.all()
+    # queryset = Workout.objects.all()
     serializer_class = WorkoutSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
+    def get_queryset(self):
+        return Workout.objects.filter(owner=self.request.user).order_by("time", "duration")
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-# class WorkoutList(generics.ListCreateAPIView):
-#     """
-#     List all workouts, or create a new workout.
-#     """
-
-#     queryset = Workout.objects.all()
-#     serializer_class = WorkoutSerializer
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
-
-
-# class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
-#     """
-#     Retrieve, update or delete a workout instance.
-#     """
-
-#     queryset = Workout.objects.all()
-#     serializer_class = WorkoutSerializer
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
-
 
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all().order_by("name")
@@ -57,24 +27,16 @@ class GroupViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-class StepsViewSet(viewsets.ModelViewSet):
-    queryset = StepCount.objects.all().order_by("day")
-    serializer_class = StepCountSerializer
-    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
-
-
-# class UserList(generics.ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-
-# class UserDetail(generics.RetrieveAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAdminUser, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAdminUser]
 
-
+    @action(methods=['get'], detail=False, permission_classes=[IsSelf],
+            url_path="current-user", url_name="current_user")
+    def get_current_user(self, request):
+        resp = UserSerializer(
+            User.objects.get(id=request.user.id),
+            context={"request": request}
+        )
+        return Response(resp.data)

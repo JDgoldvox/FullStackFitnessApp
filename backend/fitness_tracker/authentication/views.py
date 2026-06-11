@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 @login_required
 def home(request):
-    return render(request, "home.html")
+    return redirect('/api/')
 
 def login_page(request):
     if request.method == "POST":

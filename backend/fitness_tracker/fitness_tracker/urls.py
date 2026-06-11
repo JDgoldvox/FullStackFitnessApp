@@ -16,13 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# from django.contrib.auth import views as auth_views
 from authentication import views as auth_views
+# from restapi import views as rest_views
 
 urlpatterns = [
     path('', auth_views.home),
-    path('steps/', include("steps.urls")),
-    path('auth/', include("authentication.urls")),
+    # path('steps/', include("steps.urls")),
+    # path('auth/', include("authentication.urls")),
     path('admin/', admin.site.urls),
     path('api/', include("restapi.urls"), name="rest_framework"),
 ]

@@ -15,4 +15,10 @@ class Workout(models.Model):
 
     class Meta:
         ordering = ["time", "type", "duration"]
+        constraints = [
+            models.UniqueConstraint(
+                fields = ['owner', 'name'],
+                name = "unq_ownr_wkt_name"
+            )
+        ]
 
