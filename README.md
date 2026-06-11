@@ -1,6 +1,6 @@
 # FullStackFitnessApp
 
-## 🏋️‍♂️ FitTrack Pro
+## 🏋️‍♂️ FitWiz
 A comprehensive fitness management application designed to bridge the gap between workout planning and performance tracking. Whether you are a beginner looking for a structured plan or an athlete monitoring daily metrics, this app provides the tools to stay consistent and hit your personal bests.
 
 ## 🚀 Key Features
