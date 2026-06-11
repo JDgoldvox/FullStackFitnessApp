@@ -4,9 +4,10 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import './index.css'
 import App from './App.jsx'
 import Dashboard from "@/pages/Dashboard.jsx";
-import Exercises from "@/pages/Exercises.jsx";
 import Goals from "@/pages/Goals.jsx";
 import Community from "@/pages/Community.jsx";
+import Workouts from "@/pages/Workouts.jsx";
+import Core from "@/pages/Workouts/core.jsx";
 
 const router = createBrowserRouter([
     { 
@@ -18,8 +19,8 @@ const router = createBrowserRouter([
                 Component: Dashboard,
             },
             {
-                path: "Exercises",
-                Component: Exercises,
+                path: "Workouts",
+                Component: Workouts,
             },
             {
                 path: "Goals",
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
             {
                 path: "Community",
                 Component: Community,
-            }
+            },
+            { // workout routes
+                path: "Workouts/Core",
+                Component: Core,
+            },
         ]
     },
 ]);

@@ -15,7 +15,7 @@ export default function Navbar() {
                         <NavLink to="/">Dashboard</NavLink>
                     </li>
                     <li className="navbar-item">
-                        <NavLink to="/Exercises">Exercises</NavLink>
+                        <NavLink to="/Workouts">Workouts</NavLink>
                     </li>
                     <li className="navbar-item">
                         <NavLink to="/Goals">Goals</NavLink>

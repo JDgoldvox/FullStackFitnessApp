@@ -1,0 +1,10 @@
+﻿
+.exercise-node-shape {
+    background: var(--primary-white);
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--accent-green);
+    height: 6rem;
+    width: 60%;
+}
