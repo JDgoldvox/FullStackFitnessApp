@@ -4,10 +4,10 @@ export default function NodeTitle({title, Icon}) {
     return (
         <div className="shape">
             <p className="title-text">
-                {title} 
-                <Icon className="icon-style" 
-                    size={32}
-                /> 
+                {title}
+                {
+                    Icon && <Icon className="icon-style" size={32} />
+                }
             </p> 
         </div>
     )

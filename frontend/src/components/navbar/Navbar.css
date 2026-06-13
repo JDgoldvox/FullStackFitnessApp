@@ -5,6 +5,9 @@
     justify-content: start;
     align-items: center;
     background-color: var(--accent-green);
+    position: sticky;
+    z-index: 100;
+    top: 0;
 }
 
 .navbar-links

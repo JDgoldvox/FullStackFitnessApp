@@ -1,0 +1,56 @@
+﻿
+.node-container
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;  
+    
+    background: var(--primary-white);
+    border-color: var(--accent-green);
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    
+    text-align: center;
+    font-family: 'inter', sans-serif;
+    font-size: 16px;
+    color: var(--primary-font-color);
+}
+
+.node-container:hover
+{
+    background-color: var(--secondary-green);
+}
+
+.row-container
+{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.special-number
+{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.button-style
+{
+    color: var(--primary-font-color);
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: var(--accent-green);
+    border-color: var(--accent-green);
+    border-width: 2px;
+    border-style: solid;
+
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
