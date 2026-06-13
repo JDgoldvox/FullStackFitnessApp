@@ -1,0 +1,33 @@
+.community-main-img-container
+{
+    Display: flex;
+    justify-content: center;
+    align-content: center;
+    width: auto;
+    height: auto;
+    margin: 0;
+}
+
+.community-main-img
+{
+    width: 500px;
+    height: auto;
+    border-radius: 500px;
+    margin: 0.1rem 0;
+}
+
+.community-title
+{
+    text-align: center;
+    font-size: 48px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.community-text-section
+{
+    align-content: center;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'inter', sans-serif;
+    margin: 5rem;
+}

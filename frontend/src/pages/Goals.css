@@ -1,0 +1,86 @@
+
+.goals-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 48px;
+    font-weight: bold;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.goals-container
+{
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    background-color: var(--primary-white);
+
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--accent-green);
+}
+
+.goals-container h2
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-font-color);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 24px;
+    margin: 0;
+}
+
+.goal-settings
+{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.goal-settings input    
+{
+    font-size: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--primary-font-color);
+    width: 200px;
+    height: 50px;   
+    font-weight: bold;
+    text-align: center;
+}
+
+.goal-settings p
+{
+    display: flex;
+    font-size: 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: var(--primary-font-color);
+    margin: 0 1rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.goal-settings ul
+{
+    display: flex;
+    list-style-type: none;
+    flex-direction: column;
+    padding: 0;             
+    margin: 0;            
+    width: 100%;             
+    align-content: center;
+}
+
+.goal-settings li
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}

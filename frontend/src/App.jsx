@@ -7,7 +7,9 @@ function App() {
 
   return (
     <>
+        <title> FitWiz </title>
         <div className="background-color">
+            <link rel="icon" href="/favicon.ico" />
             <Navbar />
             <Outlet />
         </div>

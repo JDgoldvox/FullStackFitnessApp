@@ -5,6 +5,28 @@
     border-width: 2px;
     border-style: solid;
     border-color: var(--accent-green);
+    
     height: 6rem;
     width: 60%;
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2rem;
+}
+
+.exercise-node-shape p{
+    color: var(--primary-font-color);
+    font-size: 34px;
+    font-family: 'inter', sans-serif;
+}
+
+.exercise-node-shape input
+{
+    width: 20%;
+    height: 60%;
+    display: flex;
+    align-content: end;
+    justify-content: end;
 }

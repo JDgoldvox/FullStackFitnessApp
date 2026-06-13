@@ -24,12 +24,12 @@ export default function WorkoutTemplate({
             </div>
 
             <ul className="workout-list">
-                <li> <WorkoutNode exerciseTitle="situps" sets={5} reps={10}/> </li>
-                <li> <WorkoutNode/> </li>
-                <li> <WorkoutNode/> </li>
-                <li> <WorkoutNode/> </li>
-                <li> <WorkoutNode/> </li>
-                <li> <WorkoutNode/> </li>
+                <li> <WorkoutNode exerciseTitle="Situps" sets={5} reps={10}/> </li>
+                <li> <WorkoutNode exerciseTitle="Plank" sets={3} reps={1}/> </li>
+                <li> <WorkoutNode exerciseTitle="Russian Twists" sets={4} reps={20}/> </li>
+                <li> <WorkoutNode exerciseTitle="Leg Raises" sets={4} reps={12}/> </li>
+                <li> <WorkoutNode exerciseTitle="Mountain Climbers" sets={3} reps={30}/> </li>
+                <li> <WorkoutNode exerciseTitle="Bicycle Crunches" sets={4} reps={15}/> </li>
             </ul>
         </>
     )

@@ -1,6 +1,12 @@
 
 .background-color{
     background-color: var(--primary-cream);
-    min-height: 100vh;  
-    min-width: 100vw;
+    min-height: 100%;
+    width: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
