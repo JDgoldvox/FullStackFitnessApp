@@ -12,7 +12,7 @@ export default function Navbar() {
                 
                 <ul className="navbar-links">
                     <li className="navbar-item">
-                        <NavLink to="/">Dashboard</NavLink>
+                        <NavLink to="/Dashboard">Dashboard</NavLink>
                     </li>
                     <li className="navbar-item">
                         <NavLink to="/Workouts">Workouts</NavLink>
