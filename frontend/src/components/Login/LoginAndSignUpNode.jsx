@@ -1,10 +1,12 @@
 ﻿import '@/components/Login/LoginAndSignUpNode.css'
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import {Mail, KeyRound, User} from 'lucide-react'
+import { useNavigate } from "react-router";
 
-export default function LoginAndSignUpNode() {
+export default function LoginAndSignUpNode({setIsSignedIn}) {
     
-    const [isLogIn, setIsLogIn] = useState(true);
+    const [isLoginOption, setIsLoginOption] = useState(true);
+    const navigate = useNavigate();
     
     let password = "";
     let email = "";
@@ -14,14 +16,14 @@ export default function LoginAndSignUpNode() {
         <div className="login-and-signup-node">
             <div className = "login-and-signup-options">
               <button 
-                  className={isLogIn ? "login-button-active" : "login-button-inactive"}
-                  onClick={() => setIsLogIn(true)}
+                  className={isLoginOption ? "login-button-active" : "login-button-inactive"}
+                  onClick={() => setIsLoginOption(true)}
               >
                   Login
               </button>
               <button 
-                  className={isLogIn ? "signup-button-inactive" : "signup-button-active"}
-                  onClick={() => setIsLogIn(false)}
+                  className={isLoginOption ? "signup-button-inactive" : "signup-button-active"}
+                  onClick={() => setIsLoginOption(false)}
               >
                   Sign Up
               </button>
@@ -39,7 +41,7 @@ export default function LoginAndSignUpNode() {
                     />
                 </div>
                 {
-                    isLogIn ? null : 
+                    isLoginOption ? null : 
                     <div>
                         <div className="simple-flex-container">
                             <Mail/> <p>Email</p>
@@ -66,16 +68,77 @@ export default function LoginAndSignUpNode() {
             
             <div className="login-and-signup-button-container">
                 <button className="login-and-signup-button"
-                        onClick={() => RequestLoginAndSignUp(username, password, email)}
+                        onClick={() => RequestLoginAndSignUp(isLoginOption, setIsSignedIn, navigate, username, password, email)}
                 >
-                    {isLogIn ? "Log In" : "Sign Up"}
+                    {isLoginOption ? "Log In" : "Sign Up"}
                 </button>
             </div>
         </div>
     )
 }
 
-function RequestLoginAndSignUp(username, password, email)
-{
-    alert(`${username} ${password} ${email}`);
+async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username, password, email) {
+    const url = "http://127.0.0.1:8000/api/token/";
+
+    try {
+        const response = await fetch(
+            url, 
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result);
+
+        setIsSignedIn(true);
+        navigate("/Dashboard");
+
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    if (isLogIn) {
+        // logging in
+    }
 }
+
+
+// const [data, setData] = useState(null);
+//
+// useEffect(() =>
+// {
+//     async function GetData() {
+//         const url = "https://isitdownstatus.com/api/v1/status/discord";
+//         try {
+//             const response = await fetch(url);
+//             if (!response.ok) {
+//                 throw new Error(`Response status: ${response.status}`);
+//             }
+//
+//             const result = await response.json();
+//             setData(result);
+//         } catch (error) {
+//             console.error(error.message);
+//         }
+//     }
+//
+//     GetData();
+// } ,[]);
+//
+// return (
+//     <>
+//         <p> login </p>
+//         <p>{data?.data?.slug ?? "Loading..."}</p>
+//     </>
+// )
