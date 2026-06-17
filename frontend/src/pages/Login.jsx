@@ -2,47 +2,13 @@
 import LoginBox from '@/components/Login/LoginAndSignUpNode.jsx'
 import '@/pages/Login.css'
 
-export default function Login(isLoggedIn, setIsLoggedIn) {
-    
-    if(isSignedIn)
-    {
-        
-    }
+export default function Login({ setIsLoggedIn }) {
     
     return (
         <>
             <div className = "center-login">
-                <LoginBox setIsSignedIn={setIsSignedIn} />
+                <LoginBox setIsSignedIn={setIsLoggedIn} />
             </div>
         </>
     )
 }
-
-//const [data, setData] = useState(null);
-
-// useEffect(() =>
-// {
-//     async function GetData() {
-//         const url = "https://isitdownstatus.com/api/v1/status/discord";
-//         try {
-//             const response = await fetch(url);
-//             if (!response.ok) {
-//                 throw new Error(`Response status: ${response.status}`);
-//             }
-//
-//             const result = await response.json();
-//             setData(result);
-//         } catch (error) {
-//             console.error(error.message);
-//         }
-//     }
-//
-//     GetData();
-// } ,[]);
-//
-// return (
-//     <>
-//         <p> login </p>
-//         <p>{data?.data?.slug ?? "Loading..."}</p>
-//     </>
-// )

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from '@/components/navbar/Navbar.jsx'
 import {Outlet} from "react-router";
-import { Navigate } from "react-router";
+import Login from "@/pages/Login.jsx"
 
 function App() {
 
@@ -10,12 +10,11 @@ function App() {
     
     if (!isLoggedIn) {
         return(
-            <>
-                <Navigate to="/" replace/>
-                <Outlet context={setIsLoggedIn}/>
-            </>
+            <Login setIsLoggedIn={setIsLoggedIn} />
         );
     }
+    
+    
 
     return (
         <>
