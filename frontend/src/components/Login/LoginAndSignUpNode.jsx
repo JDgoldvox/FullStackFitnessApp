@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import {Mail, KeyRound, User} from 'lucide-react'
 
-export default function LoginAndSignUpNode() {
+export default function LoginAndSignUpNode(setIsSignedIn) {
     
     const [isLogIn, setIsLogIn] = useState(true);
     
@@ -66,7 +66,7 @@ export default function LoginAndSignUpNode() {
             
             <div className="login-and-signup-button-container">
                 <button className="login-and-signup-button"
-                        onClick={() => RequestLoginAndSignUp(username, password, email)}
+                        onClick={() => RequestLoginAndSignUp(isLogIn, username, password, email)}
                 >
                     {isLogIn ? "Log In" : "Sign Up"}
                 </button>
@@ -75,7 +75,15 @@ export default function LoginAndSignUpNode() {
     )
 }
 
-function RequestLoginAndSignUp(username, password, email)
+function RequestLoginAndSignUp(isLogIn, username, password, email)
 {
     alert(`${username} ${password} ${email}`);
+    
+    //isSignedIn
+    
+    
+    if(isLogIn) //logging in
+    {
+        
+    }
 }

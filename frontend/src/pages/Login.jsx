@@ -2,13 +2,17 @@
 import LoginBox from '@/components/Login/LoginAndSignUpNode.jsx'
 import '@/pages/Login.css'
 
-export default function Login() {
-    const [isSignUp, setIsSignUp] = useState(false);
+export default function Login(isLoggedIn, setIsLoggedIn) {
+    
+    if(isSignedIn)
+    {
+        
+    }
     
     return (
         <>
             <div className = "center-login">
-                <LoginBox />
+                <LoginBox setIsSignedIn={setIsSignedIn} />
             </div>
         </>
     )

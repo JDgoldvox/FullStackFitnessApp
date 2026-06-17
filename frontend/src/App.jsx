@@ -6,13 +6,13 @@ import { Navigate } from "react-router";
 
 function App() {
 
-    const isLoggedIn = false;
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     
     if (!isLoggedIn) {
         return(
             <>
                 <Navigate to="/" replace/>
-                <Outlet/>
+                <Outlet context={setIsLoggedIn}/>
             </>
         );
     }
