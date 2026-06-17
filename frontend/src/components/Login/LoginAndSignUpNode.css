@@ -1,0 +1,118 @@
+﻿
+.login-and-signup-node
+{
+    width: 500px;
+    height: 600px;
+    background-color: var(--primary-white);
+    border-style: solid;
+    border-color: var(--accent-green);
+    border-radius: 22px;
+}
+
+.login-and-signup-options
+{
+    height: 10%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.login-and-signup-options button
+{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 200%;
+    color: var(--primary-font-color);
+}
+
+.login-and-signup-options button:hover
+{
+    background-color: var(--secondary-green);
+}
+
+.login-button-active
+{
+    background-color: var(--accent-green);
+    border-top-left-radius: 20px;
+    border-style: none;
+    
+}
+
+.login-button-inactive
+{
+    background-color: var(--primary-white);
+    border-top-left-radius: 20px;
+    border-style: none;
+}
+
+.signup-button-active
+{
+    background-color: var(--accent-green);
+    border-top-right-radius: 20px;
+    border-style: none;
+
+}
+
+.signup-button-inactive
+{
+    background-color: var(--primary-white);
+    border-top-right-radius: 20px;
+    border-style: none;
+}
+
+.login-and-signup-input-container
+{
+    margin-top: 10%;
+    Display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+}
+
+.login-and-signup-input-container input
+{
+    Display: flex;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 150%;
+    color: var(--primary-font-color);
+    width: 100%;
+}
+
+.login-and-signup-input-container p
+{
+    Display: flex;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 150%;
+    color: var(--primary-font-color);
+    margin: 0;
+    padding-left: 10px;
+}
+
+.login-and-signup-button
+{
+    width: 80%;
+    height: 50px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 150%;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+.login-and-signup-button:hover
+{
+    background-color: var(--secondary-green);
+}
+
+.login-and-signup-button-container
+{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.simple-flex-container
+{
+    display: flex;
+}
+

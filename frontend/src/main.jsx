@@ -8,6 +8,7 @@ import Goals from "@/pages/Goals.jsx";
 import Community from "@/pages/Community.jsx";
 import Workouts from "@/pages/Workouts.jsx";
 import Core from "@/pages/Workouts/core.jsx";
+import Login from "@/pages/Login.jsx";
 
 const router = createBrowserRouter([
     { 
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                Component: Login,
+            },
+            {
+                path: "Dashboard",
                 Component: Dashboard,
             },
             {

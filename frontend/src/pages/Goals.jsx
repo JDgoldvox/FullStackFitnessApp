@@ -57,6 +57,8 @@ export default function Goals() {
                     <p> Bpm </p>
                 </div>
             </section>
+            
+            <br></br>
         </>
     )
 }

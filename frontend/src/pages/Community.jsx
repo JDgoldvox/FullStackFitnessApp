@@ -27,11 +27,6 @@ export default function Community()
                 a new lifting personal best, or staying consistent with your nutrition—becomes much easier 
                 when you’re part of a team.
             </section>
-
-            <section className="community-text-section">
-                How are you planning to structure these community sections—should we highlight recent 
-                personal records or feature shared workout plans first?
-            </section>
         </>
     )
 }
