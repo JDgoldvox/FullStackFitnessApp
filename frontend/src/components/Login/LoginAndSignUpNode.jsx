@@ -80,65 +80,40 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
 async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username, password, email) {
     const url = "http://127.0.0.1:8000/api/token/";
 
-    try {
-        const response = await fetch(
-            url, 
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        });
+    if(isLogIn)
+    {
+        try {
+            const response = await fetch(
+                url,
+                {
+                    method: "POST",
+                    mode: "cors",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
 
-        if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            console.log(result);
+
+            setIsSignedIn(true);
+            navigate("/Dashboard");
+
+        } catch (error) {
+            console.error(error.message);
         }
-
-        const result = await response.json();
-        console.log(result);
-
-        setIsSignedIn(true);
-        navigate("/Dashboard");
-
-    } catch (error) {
-        console.error(error.message);
+    }
+    else
+    {
+        
     }
 
-    if (isLogIn) {
-        // logging in
-    }
 }
-
-
-// const [data, setData] = useState(null);
-//
-// useEffect(() =>
-// {
-//     async function GetData() {
-//         const url = "https://isitdownstatus.com/api/v1/status/discord";
-//         try {
-//             const response = await fetch(url);
-//             if (!response.ok) {
-//                 throw new Error(`Response status: ${response.status}`);
-//             }
-//
-//             const result = await response.json();
-//             setData(result);
-//         } catch (error) {
-//             console.error(error.message);
-//         }
-//     }
-//
-//     GetData();
-// } ,[]);
-//
-// return (
-//     <>
-//         <p> login </p>
-//         <p>{data?.data?.slug ?? "Loading..."}</p>
-//     </>
-// )
