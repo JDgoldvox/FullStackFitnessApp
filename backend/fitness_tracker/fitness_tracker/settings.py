@@ -81,13 +81,17 @@ SIMPLE_JWT = {
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
 }
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173"
-# ]
-# CORS_ALLOWED_ORIGIN_REGEXES = [
-#     r"^http://localhost:[0-9]+$"
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://localhost:5173"
+]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https?://localhost:\d+$",
+    r"^https?://127\.0\.0\.1:d+$"
+]
+
+# REMOVE
+# CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'fitness_tracker.urls'
 
