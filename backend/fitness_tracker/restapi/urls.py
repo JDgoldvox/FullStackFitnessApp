@@ -26,19 +26,21 @@ router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet, basename="user")
 router.register(r"groups", views.GroupViewSet, basename="groups")
 
-# main_router.registry.extend(router.registry)
-# main_router.registry.extend(step_router.registry)
-# main_router.registry.extend(work_router.registry)
+# not nested endpoints
+main_router.registry.extend(router.registry)
+main_router.registry.extend(step_router.registry)
+main_router.registry.extend(work_router.registry)
+main_router.registry.extend(food_router.registry)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path("", include(router.urls)),
+    path("", include(main_router.urls)),
     path('token/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path('token/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
     path('token/verify/', TokenVerifyView.as_view(), name="token_verify"),
-    path("step/", include(step_router.urls)),
-    path("workout/", include(work_router.urls)),
-    path("food/", include(food_router.urls)),
+    # path("step/", include(step_router.urls)), # nested endpoints
+    # path("workout/", include(work_router.urls)),
+    # path("food/", include(food_router.urls)),
     # path("auth/", include("rest_framework.urls")), # basic auth
 ]

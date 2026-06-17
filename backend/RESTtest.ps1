@@ -1,4 +1,3 @@
-
 function get_token()
 {
     $body = @{
@@ -19,7 +18,7 @@ function get_protected_path()
         "Authorization" = "Bearer $($result.access)"
     }
 
-    Invoke-RestMethod "http://localhost:8000/api/users/" -Headers $headers -Method Get | ConvertTo-Json > .\result.json
+    Invoke-RestMethod "http://localhost:8000/api/users/" -Headers $headers -Method Get | ConvertTo-Json -Depth 10 > .\result.json
 }
 
 get_protected_path
