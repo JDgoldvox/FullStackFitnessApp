@@ -36,11 +36,10 @@ main_router.registry.extend(food_router.registry)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("", include(main_router.urls)),
-    path('token/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path('token/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
+    # path('token/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # path('token/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
     path('token/verify/', TokenVerifyView.as_view(), name="token_verify"),
     # path("step/", include(step_router.urls)), # nested endpoints
     # path("workout/", include(work_router.urls)),
     # path("food/", include(food_router.urls)),
-    # path("auth/", include("rest_framework.urls")), # basic auth
 ]

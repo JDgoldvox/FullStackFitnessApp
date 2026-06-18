@@ -5,66 +5,57 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.conf import settings
 # from .models import *
 
-@login_required
-def home(request):
-    return redirect('/api/')
+from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import AuthenticationFailed
+from rest_framework.views import APIView, Response
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from django.middleware import csrf
 
-def login_page(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
 
-        #check if user exists
-        if not User.objects.filter(username=username).exists():
-            # display error
-            messages.error(request, "Invalid Username")
-            return redirect("authentication:login")
-        
+def get_tokens_for_user(user):
+    if not user.is_active:
+        raise AuthenticationFailed("User is not active")
+    
+    refresh = RefreshToken.for_user(user)
+
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
+class AuthRateThrottle(AnonRateThrottle):
+    rate = '3/minute'
+
+class LoginView(APIView):
+    throttle_classes = [AuthRateThrottle]
+
+    def post(self, request, format=None):
+        data = request.data
+        response = Response()
+        username = data.get('username', None)
+        password = data.get('password', None)
         user = authenticate(username=username, password=password)
 
-        if user is None:
-            messages.error(request, 'Invalid Password')
-            return redirect("authentication:login")
+        if user is not None:
+            if not user.is_active:
+                raise AuthenticationFailed("User is not active")
+            else:
+                data = get_tokens_for_user(user)
+                response.set_cookie(
+                    key=settings.SIMPLE_JWT['AUTH_COOKIE'],
+                    value=data['access'],
+                    expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
+                    secure = settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
+                    httponly = settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
+                    samesite = settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+                )
+                csrf.get_token(request)
+                response.data = data
+                response.status_code = status.HTTP_200_OK
+                return response
         else:
-            login(request, user)
-            return redirect('authentication:home')
-
-    return render(request, "login.html")
-
-def register_page(request):
-    if request.method == 'POST':
-        first_name = request.POST.get('first_name')
-        last_name = request.POST.get('last_name')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        
-        # Check if user exists
-        user = User.objects.filter(username=username)
-        
-        if user.exists():
-            messages.info(request, "Username already taken!")
-            return redirect('authentication:register')
-        
-        user = User.objects.create_user(
-            first_name=first_name,
-            last_name=last_name,
-            username=username
-        )
-        
-        # Set the user's password and save the user object
-        user.set_password(password)
-        user.save()
-        
-        # Display an information message indicating successful account creation
-        messages.info(request, "Account created Successfully!")
-        return redirect('authentication:register')
-    
-    return render(request, 'register.html')
-
-@login_required
-def logout_user(request):
-    logout(request)
-
-    return redirect('authentication:login')
+            return Response({"detail": "Credentials are incorrect"}, status=status.HTTP_401_UNAUTHORIZED)

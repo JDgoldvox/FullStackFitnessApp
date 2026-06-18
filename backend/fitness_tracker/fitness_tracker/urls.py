@@ -20,9 +20,8 @@ from authentication import views as auth_views
 # from restapi import views as rest_views
 
 urlpatterns = [
-    path('', auth_views.home),
     # path('steps/', include("steps.urls")),
-    # path('auth/', include("authentication.urls")),
+    path('auth/', include("authentication.urls")),
     path('admin/', admin.site.urls),
     path('api/', include("restapi.urls"), name="rest_framework"),
 ]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 from pathlib import Path
 import os
+from datetime import timedelta
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -53,13 +54,24 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_PREMISSION_CLASSES": [
-        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+        "authentication.authenticate.CustomJWTAuthentication"
+        # "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
+
+    "DEFUALT_THROTTLE_CLASSES": [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle',
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        'anon': '100/day',
+        'user': '1000/day',
+    },
 }
 
 MIDDLEWARE = [
@@ -74,6 +86,15 @@ MIDDLEWARE = [
 ]
 
 SIMPLE_JWT = {
+    "AUTH_COOKIE": 'access_token',
+    "AUTH_COOKIE_DOMAIN": None,
+    "AUTH_COOKIE_SECURE": False, # change to true when https://
+    "AUTH_COOKIE_HTTP_ONLY": True,
+    "AUTH_COOKIE_PATH": '/',
+    "AUTH_COOKIE_SAMESITE": 'Lax',
+
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
@@ -87,7 +108,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^https?://localhost:\d+$",
-    r"^https?://127\.0\.0\.1:d+$"
+    r"^https?://127\.0\.0\.1:\d+$"
 ]
 
 # REMOVE
