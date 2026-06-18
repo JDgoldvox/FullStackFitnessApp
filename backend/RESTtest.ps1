@@ -15,12 +15,15 @@ function get_protected_path()
 {
     try {
         $result = get_token | ConvertFrom-Json -AsHashtable
-
+        Write-Host $result.Keys
+        
         $headers = @{
             "Authorization" = "Bearer $($result.access)"
         }
 
         Invoke-RestMethod "http://localhost:8000/api/users/" -Headers $headers -Method Get | ConvertTo-Json -Depth 10 > .\result.json
+
+        $result.refresh
 
     }
     catch {
@@ -32,4 +35,15 @@ function get_protected_path()
     
 }
 
-get_protected_path
+function refresh_token($boom)
+{
+    $body = @{
+        "refresh" = $boom
+    } | ConvertTo-Json
+
+    Invoke-RestMethod "http://localhost:8000/api/token/refresh/" -Body $body -Method Post -ContentType "application/json" -Debug
+}
+
+$refresh = get_protected_path
+
+refresh_token $refresh

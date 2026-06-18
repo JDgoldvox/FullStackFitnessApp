@@ -85,16 +85,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+refresh_cookie_timedelta = timedelta(days=1)
 SIMPLE_JWT = {
     "AUTH_COOKIE": 'access_token',
+    "REFRESH_AUTH_COOKIE": 'refresh_token',
     "AUTH_COOKIE_DOMAIN": None,
     "AUTH_COOKIE_SECURE": False, # change to true when https://
     "AUTH_COOKIE_HTTP_ONLY": True,
     "AUTH_COOKIE_PATH": '/',
     "AUTH_COOKIE_SAMESITE": 'Lax',
+    "REFRESH_TOKEN_PATH": '/api/token/refresh/',
 
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": refresh_cookie_timedelta,
     "ROTATE_REFRESH_TOKENS": False,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": True,
