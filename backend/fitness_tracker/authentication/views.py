@@ -2,13 +2,17 @@ from typing import Any
 
 from django.contrib.auth import authenticate
 from django.conf import settings
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.middleware import csrf
+from django.middleware.csrf import get_token
 
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework.views import APIView, Response
 from rest_framework.throttling import AnonRateThrottle
-from django.middleware import csrf
+from rest_framework.permissions import AllowAny
 
 from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
@@ -47,12 +51,21 @@ def setAccessCookie(response: Response, token: str):
         samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
     )
 
-class AuthRateThrottle(AnonRateThrottle):
+class AnonAuthRateThrottle(AnonRateThrottle):
     rate = '3/minute'
 
-class LoginView(APIView):
-    throttle_classes = [AuthRateThrottle]
+class CSRFTokenView(APIView):
+    permission_classes = [AllowAny]
+    throttle_classes = [AnonAuthRateThrottle]
 
+    def get(self, request, format=None):
+        return Response({settings.CSRF_COOKIE_NAME: get_token(request)})
+
+class LoginView(APIView):
+    permission_classes = [AllowAny]
+    throttle_classes = [AnonAuthRateThrottle]
+
+    @method_decorator(ensure_csrf_cookie)
     def post(self, request, format=None):
         data = request.data
         response = Response()

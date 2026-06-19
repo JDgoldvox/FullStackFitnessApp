@@ -53,12 +53,11 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_PREMISSION_CLASSES": [
-        "authentication.authenticate.CustomJWTAuthentication"
-        # "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        "authentication.authenticate.CustomJWTAuthentication",
     ],
 
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
@@ -103,7 +102,14 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
     "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+
+    # csrf
+    "AUTH_COOKIE_USE_CSRF": True,
 }
+
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_NAME = "csrftoken"
+CSRF_COOKIE_SAMESITE = 'Lax'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
@@ -116,6 +122,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
 
 # REMOVE
 # CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True # if cors not working uncomment
 
 ROOT_URLCONF = 'fitness_tracker.urls'
 

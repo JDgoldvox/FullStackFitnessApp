@@ -9,12 +9,12 @@ from rest_framework_simplejwt.tokens import Token
 
 
 def enforce_csrf(request):
-    check = CSRFCheck()
+    check = CSRFCheck(request)
     check.process_request(request)
     reason = check.process_view(request, None, (), {})
     if reason:
         raise exceptions.PermissionDenied('CSRF failed: %s' % reason)
-    
+
 class CustomJWTAuthentication(JWTAuthentication):
     def authenticate(self, request: Request) -> Optional[tuple[AuthUser, Token]]:
         header = self.get_header(request)

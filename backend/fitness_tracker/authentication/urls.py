@@ -4,5 +4,6 @@ from . import views
 
 app_name = "authentication"
 urlpatterns = [
-    path('login/', views.LoginView.as_view(), name='login')
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('csrf/', views.CSRFTokenView.as_view(), name='csrf_token')
 ]
