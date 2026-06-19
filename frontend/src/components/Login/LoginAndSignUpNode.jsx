@@ -115,5 +115,4 @@ async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username,
     {
         
     }
-
 }
