@@ -93,7 +93,8 @@ SIMPLE_JWT = {
     "AUTH_COOKIE_HTTP_ONLY": True,
     "AUTH_COOKIE_PATH": '/',
     "AUTH_COOKIE_SAMESITE": 'Lax',
-    "REFRESH_TOKEN_PATH": '/api/token/refresh/',
+    "ACCESS_TOKEN_PATH": '/api/',
+    "REFRESH_TOKEN_PATH": '/api/token/',
 
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": refresh_cookie_timedelta,

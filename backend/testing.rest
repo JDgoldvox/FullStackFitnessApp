@@ -3,7 +3,7 @@
 ### Get csrf token
 # @name getCSRF
 
-GET http://{{hostname}}/auth/csrf HTTP/1.1
+GET http://{{hostname}}/auth/csrf/ HTTP/1.1
 Content-Type: application/json
 
 ### Authenticate
@@ -30,5 +30,16 @@ Content-Type: application/json
 
 POST http://{{hostname}}/api/token/refresh/ HTTP/1.1
 Content-Type: application/json
+
+### verify token
+# @name verifyName
+
+POST http://{{hostname}}/api/token/verify/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "token-type": "access"
+}
+
 
 ###

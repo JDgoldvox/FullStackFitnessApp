@@ -7,7 +7,8 @@ from rest_framework_simplejwt.views import (
 )
 from authentication.views import (
     CookieObtainPairView,
-    CookieTokenRefreshView
+    CookieTokenRefreshView,
+    CookieTokenVerifyView
 )
 
 # views/router imports
@@ -42,7 +43,7 @@ urlpatterns = [
     path("", include(main_router.urls)),
     # path('token/', CookieObtainPairView.as_view(), name="token_obtain_pair"),
     path('token/refresh/', CookieTokenRefreshView.as_view(), name="token_refresh"),
-    path('token/verify/', TokenVerifyView.as_view(), name="token_verify"),
+    path('token/verify/', CookieTokenVerifyView.as_view(), name="token_verify"),
     # path("step/", include(step_router.urls)), # nested endpoints
     # path("workout/", include(work_router.urls)),
     # path("food/", include(food_router.urls)),

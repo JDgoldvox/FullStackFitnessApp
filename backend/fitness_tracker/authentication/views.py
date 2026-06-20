@@ -8,16 +8,23 @@ from django.middleware import csrf
 from django.middleware.csrf import get_token
 
 from rest_framework import status
+from rest_framework.request import Request
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import AuthenticationFailed
 from rest_framework.views import APIView, Response
 from rest_framework.throttling import AnonRateThrottle
 from rest_framework.permissions import AllowAny
+from rest_framework.exceptions import ValidationError
 
-from rest_framework_simplejwt.views import TokenRefreshView, TokenObtainPairView
+from rest_framework_simplejwt.views import (
+    TokenRefreshView,
+    TokenObtainPairView,
+    TokenVerifyView,
+)
 from rest_framework_simplejwt.serializers import TokenRefreshSerializer
-from rest_framework_simplejwt.exceptions import InvalidToken
+from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 
+from .serializers import CookieTokenVerifySerializer, CookieTokenRefreshSerializer
 
 def get_tokens_for_user(user):
     if not user.is_active:
@@ -48,7 +55,8 @@ def setAccessCookie(response: Response, token: str):
         expires=settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'],
         secure=settings.SIMPLE_JWT['AUTH_COOKIE_SECURE'],
         httponly=settings.SIMPLE_JWT['AUTH_COOKIE_HTTP_ONLY'],
-        samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE']
+        samesite=settings.SIMPLE_JWT['AUTH_COOKIE_SAMESITE'],
+        # path=settings.SIMPLE_JWT['ACCESS_TOKEN_PATH']
     )
 
 class AnonAuthRateThrottle(AnonRateThrottle):
@@ -89,15 +97,6 @@ class LoginView(APIView):
         else:
             return Response({"detail": "Credentials are incorrect"}, status=status.HTTP_401_UNAUTHORIZED)
 
-class CookieTokenRefreshSerializer(TokenRefreshSerializer):
-    refresh = None
-    def validate(self, attrs: dict[str, Any]) -> dict[str, str]:
-        attrs['refresh'] = self.context['request'].COOKIES.get(settings.SIMPLE_JWT['REFRESH_AUTH_COOKIE'])
-        if attrs['refresh']:
-            return super().validate(attrs)
-        else:
-            raise InvalidToken("refresh token and/or access token not found")
-
 class CookieObtainPairView(TokenObtainPairView):
     def finalize_response(self, request, response, *args, **kwargs):
         if response.data.get('refresh'):
@@ -114,3 +113,14 @@ class CookieTokenRefreshView(TokenRefreshView):
             setAccessCookie(response, response.data['access'])
         return super().finalize_response(request, response, *args, **kwargs)
     serializer_class = CookieTokenRefreshSerializer
+
+class CookieTokenVerifyView(TokenVerifyView):
+    serializer_class = CookieTokenVerifySerializer
+    def post(self, request: Request, *args, **kwargs) -> Response:
+        serializer = self.get_serializer(data=request.data)
+
+        try:
+            serializer.is_valid(raise_exception=True)
+        except TokenError as e:
+            raise InvalidToken(e.args[0])
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
