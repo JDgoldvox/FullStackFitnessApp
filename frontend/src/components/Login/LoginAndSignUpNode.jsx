@@ -2,6 +2,7 @@
 import {useEffect, useState} from 'react';
 import {Mail, KeyRound, User} from 'lucide-react'
 import { useNavigate } from "react-router";
+import { GetCookie } from "@/utility/HttpUtility.js"
 
 export default function LoginAndSignUpNode({setIsSignedIn}) {
     
@@ -78,18 +79,41 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
 }
 
 async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username, password, email) {
-    const url = "http://127.0.0.1:8000/api/token/";
+    
+    const csrfPath = "http://127.0.0.1:8000/api/csrf/";
+    const authenticatePath = "http://127.0.0.1:8000/api/token/";
+    let csrfCookie = null;
+    
+    try {
+        const response = await fetch(
+            csrfPath,
+            {
+                method: "GET",
+                credentials: "include",
+            });
+        
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        csrfCookie = GetCookie("X-CSRFToken");
+    }
+    catch (error) {
+        console.error(error.message);
+        return;
+    }
 
     if(isLogIn)
     {
         try {
             const response = await fetch(
-                url,
+                authenticatePath,
                 {
                     method: "POST",
-                    mode: "cors",
+                    credentials: "include",
                     headers: {
                         "Content-Type": "application/json",
+                        "X-CSRFToken": csrfCookie,
                     },
                     body: JSON.stringify({
                         username: username,
