@@ -16,3 +16,9 @@ A comprehensive fitness management application designed to bridge the gap betwee
 <img width= alt="image" src="readme_images/goals.png" />
 <img width= alt="image" src="readme_images/workouts.png" />
 <img width= alt="image" src="readme_images/community.png" />
+
+![Login Screen](readme_images/login_screen.png)
+![Dashboard](readme_images/dashboard.png)
+![Goals](readme_images/goals.png)
+![Workouts](readme_images/workouts.png)
+![Community](readme_images/community.png)
