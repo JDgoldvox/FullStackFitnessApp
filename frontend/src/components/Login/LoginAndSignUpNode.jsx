@@ -9,9 +9,9 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
     const [isLoginOption, setIsLoginOption] = useState(true);
     const navigate = useNavigate();
     
-    let password = "";
-    let email = "";
-    let username = "";
+    const [password, setPassword] = useState("");
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     
     return (
         <div className="login-and-signup-node">
@@ -38,7 +38,7 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
                     <input 
                         type="text" 
                         placeholder="Type Username" 
-                        onChange={(val) => username = val.target.value}
+                        onChange={(val) => setUsername(val.target.value)}
                     />
                 </div>
                 {
@@ -51,7 +51,7 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
                         <input 
                             type="text"
                             placeholder="Type Email"
-                            onChange={(val) => email = val.target.value}
+                            onChange={(val) => setEmail(val.target.value)}
                             />
                     </div>
                 }
@@ -62,7 +62,7 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
                     <input 
                         type="text"
                         placeholder="Type Password"
-                        onChange={(val) => password = val.target.value}
+                        onChange={(val) => setPassword(val.target.value)}
                     />
                 </div>
             </div>
@@ -80,8 +80,8 @@ export default function LoginAndSignUpNode({setIsSignedIn}) {
 
 async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username, password, email) {
     
-    const csrfPath = "http://127.0.0.1:8000/api/csrf/";
-    const authenticatePath = "http://127.0.0.1:8000/api/token/";
+    const csrfPath = "http://localhost:8000/auth/csrf/";
+    const authenticatePath = "http://localhost:8000/api/token/refresh/";
     let csrfCookie = null;
     
     try {
@@ -96,13 +96,16 @@ async function RequestLoginAndSignUp(isLogIn, setIsSignedIn, navigate, username,
             throw new Error(`Response status: ${response.status}`);
         }
 
-        csrfCookie = GetCookie("X-CSRFToken");
+        csrfCookie = GetCookie("csrftoken");
+        console.log("cookie: " + csrfCookie);
     }
     catch (error) {
         console.error(error.message);
         return;
     }
 
+    await new Promise(resolve => setTimeout(resolve, 100));
+    
     if(isLogIn)
     {
         try {
