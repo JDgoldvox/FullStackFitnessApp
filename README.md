@@ -11,8 +11,8 @@ A comprehensive fitness management application designed to bridge the gap betwee
 <b>Goal Setting:</b> Define custom milestones and track your journey with intuitive progress markers.
 
 <b>Responsive Design:</b> A seamless experience across mobile and desktop devices.
-<img width= alt="image" src="readme_images/login_screen" />
-<img width= alt="image" src="readme_images/dashboard" />
-<img width= alt="image" src="readme_images/goals" />
-<img width= alt="image" src="readme_images/workouts" />
-<img width= alt="image" src="readme_images/community" />
+<img width= alt="image" src="readme_images/login_screen.png" />
+<img width= alt="image" src="readme_images/dashboard.png" />
+<img width= alt="image" src="readme_images/goals.png" />
+<img width= alt="image" src="readme_images/workouts.png" />
+<img width= alt="image" src="readme_images/community.png" />
