@@ -14,16 +14,21 @@ A comprehensive fitness management application designed to bridge the gap betwee
 
 # Pages
 Login Screen
+
 ![Login Screen](readme_images/login_screen.png)
 
 Dashboard
+
 ![Dashboard](readme_images/dashboard.png)
 
 Goals
+
 ![Goals](readme_images/goals.png)
 
 Workouts
+
 ![Workouts](readme_images/workouts.png)
 
 Community
+
 ![Community](readme_images/community.png)
