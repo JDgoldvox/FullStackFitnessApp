@@ -6,15 +6,13 @@ import Login from "@/pages/Login.jsx"
 
 function App() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
     
     if (!isLoggedIn) {
         return(
             <Login setIsLoggedIn={setIsLoggedIn} />
         );
     }
-    
-    
 
     return (
         <>
