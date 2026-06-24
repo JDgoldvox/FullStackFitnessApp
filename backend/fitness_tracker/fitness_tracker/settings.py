@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'restapi.apps.RestapiConfig',
     'workouts.apps.WorkoutsConfig',
     'foods.apps.FoodsConfig',
+    'goals.apps.GoalsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

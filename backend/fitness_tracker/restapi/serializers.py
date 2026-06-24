@@ -7,16 +7,16 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["url", "name"]
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    goals = serializers.HyperlinkedRelatedField(
+        many=False, view_name="all_goals-detail", read_only=True)
     workouts = serializers.HyperlinkedRelatedField(
         many=True, view_name="workouts-detail", read_only=True)
     steps = serializers.HyperlinkedRelatedField(
         many=True, view_name="steps-detail", read_only=True)
-    step_goal = serializers.HyperlinkedRelatedField(
-        many=False, view_name="step_goal-detail", read_only=True)
     foods = serializers.HyperlinkedRelatedField(
         many=True, view_name="foods-detail", read_only=True)
     
 
     class Meta:
         model = User
-        fields = ["url", "id", "username", "workouts", "steps", "step_goal", "foods"]
+        fields = ["url", "id", "username", "all_goals"] # "workouts", "steps", "foods"
